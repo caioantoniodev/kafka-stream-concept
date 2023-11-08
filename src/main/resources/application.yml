@@ -1,1 +1,10 @@
-
+server:
+  port: 8080
+spring:
+  application:
+    name: kafka_streams
+  kafka:
+    bootstrap-servers: localhost:9092
+topics:
+  inbound-event: INBOUND_EVENT
+  parking-lot: PARKING_LOT

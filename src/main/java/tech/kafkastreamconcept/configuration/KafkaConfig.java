@@ -1,4 +1,4 @@
-package tech.kafkastreamconcept.config;
+package tech.kafkastreamconcept.configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.streams.KafkaStreams;
@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
+import java.util.UUID;
 
 @Configuration
 public class KafkaConfig {
@@ -24,10 +25,9 @@ public class KafkaConfig {
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-concept");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         props.put(StreamsConfig.NUM_STREAM_THREADS_CONFIG, 1);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 9000);
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 5000);
         props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, WallclockTimestampExtractor.class.getName());
-
-        var describe = streamsTopology.describe();
 
         final var topology = new KafkaStreams(streamsTopology, props);
         topology.start();

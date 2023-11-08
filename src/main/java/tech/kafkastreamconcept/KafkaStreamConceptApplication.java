@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KafkaStreamConceptApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KafkaStreamConceptApplication.class, args);
-	}
+    public static void main(String[] args) {
+
+        SpringApplication.run(KafkaStreamConceptApplication.class, args);
+    }
 
 }
