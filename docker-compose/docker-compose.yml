@@ -3,11 +3,11 @@ services:
   zookeeper:
     image: wurstmeister/zookeeper
   kafka:
-    image: wurstmeister/kafka
+    image: wurstmeister/kafka:2.12-2.5.1
     hostname: kafka
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "INBOUND_EVENT:1:1,PARKING_LOT:1:1"
+      KAFKA_CREATE_TOPICS: "INBOUND_EVENT:6:1,PARKING_LOT:6:1"
     ports:
       - 9092:9092

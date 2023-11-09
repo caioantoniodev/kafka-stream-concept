@@ -2,9 +2,23 @@ server:
   port: 8080
 spring:
   application:
-    name: kafka_streams
+    name: kafka-stream-concept
   kafka:
     bootstrap-servers: localhost:9092
+    streams:
+      application-id: kafka-stream-concept
+      properties:
+        num:
+          stream:
+            threads: 2
+        topology:
+          optimization: all
+    producer:
+      properties:
+        linger:
+          ms: 100
+    consumer:
+      auto-offset-reset: latest
 topics:
   inbound-event: INBOUND_EVENT
   parking-lot: PARKING_LOT
