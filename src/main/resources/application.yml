@@ -20,5 +20,6 @@ spring:
     consumer:
       auto-offset-reset: latest
 topics:
-  inbound-event: INBOUND_EVENT
-  parking-lot: PARKING_LOT
+  play-odd-or-even-topic: PLAY_ODD_OR_EVEN_TOPIC
+  odd-topic: ODD_TOPIC
+  even-topic: EVEN_TOPIC
