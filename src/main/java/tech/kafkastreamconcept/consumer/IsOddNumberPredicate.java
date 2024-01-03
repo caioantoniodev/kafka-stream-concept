@@ -1,4 +1,4 @@
-package tech.kafkastreamconcept.processing;
+package tech.kafkastreamconcept.consumer;
 
 import org.apache.kafka.streams.kstream.Predicate;
 import tech.kafkastreamconcept.model.OddOrEvenEvent;

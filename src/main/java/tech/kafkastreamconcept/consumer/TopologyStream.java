@@ -1,4 +1,4 @@
-package tech.kafkastreamconcept.processing;
+package tech.kafkastreamconcept.consumer;
 
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
@@ -33,25 +33,21 @@ public class TopologyStream {
         this.outEvenTopic = outEvenTopic;
     }
 
-    private Serde<OddOrEvenEvent> odsOrEvensEventSerde() {
+    private Serde<OddOrEvenEvent> oddOrEvenEventSerde() {
         return Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(OddOrEvenEvent.class));
     }
 
     @Autowired
     void consumeEvent(@Autowired StreamsBuilder builder) {
-        builder.stream(inPlayOddOrEvenTopic, Consumed.with(Serdes.String(), odsOrEvensEventSerde()))
+        builder.stream(inPlayOddOrEvenTopic, Consumed.with(Serdes.String(), oddOrEvenEventSerde()))
                 .peek((k, message) -> LOGGER.info("Received message [{}]", message))
                 .split()
-                .branch(new IsOddNumberPredicate(), Branched.withConsumer(baseStream -> {
-                    baseStream
-                            .peek((k, message) -> LOGGER.info("The number [{}] is odd", message.getNumber()))
-                            .to(outOddTopic, Produced.with(Serdes.String(), odsOrEvensEventSerde()));
-                }))
-                .branch(new IsEvenNumberPredicate(), Branched.withConsumer(baseStream -> {
-                    baseStream
-                            .peek((k, message) -> LOGGER.info("The number [{}] is even", message.getNumber()))
-                            .to(outEvenTopic, Produced.with(Serdes.String(), odsOrEvensEventSerde()));
-                }))
+                .branch(new IsOddNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
+                        .peek((k, message) -> LOGGER.info("The number [{}] is odd", message.getNumber()))
+                        .to(outOddTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
+                .branch(new IsEvenNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
+                        .peek((k, message) -> LOGGER.info("The number [{}] is even", message.getNumber()))
+                        .to(outEvenTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
                 .noDefaultBranch();
     }
 }
