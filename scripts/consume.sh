@@ -1,6 +1,7 @@
-./kafka-console-consumer.sh \
---topic EVEN_TOPIC \
---bootstrap-server localhost:9092 | jq
+#outside container
+kcat -C -b localhost:9092 -t PLAY_ODD_OR_EVEN_TOPIC -e | jq
+kcat -C -b localhost:9092 -t ODD_TOPIC -e | jq
+kcat -C -b localhost:9092 -t EVEN_TOPIC -e | jq
 
 #inside container
 ./kafka-console-consumer --bootstrap-server kafka:29092 --topic PLAY_ODD_OR_EVEN_TOPIC --from-beginning
