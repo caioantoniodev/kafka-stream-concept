@@ -10,10 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.stereotype.Component;
-import tech.kafkastreamconcept.model.OddOrEvenEvent;
+
+import static tech.kafkastreamconcept.util.SerdeUtil.oddOrEvenEventSerde;
 
 @Component
 public class TopologyStream {
@@ -31,10 +30,6 @@ public class TopologyStream {
         this.inPlayOddOrEvenTopic = inPlayOddOrEvenTopic;
         this.outOddTopic = outOddTopic;
         this.outEvenTopic = outEvenTopic;
-    }
-
-    private Serde<OddOrEvenEvent> oddOrEvenEventSerde() {
-        return Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(OddOrEvenEvent.class));
     }
 
     @Autowired
