@@ -37,12 +37,12 @@ public class TopologyStream {
         builder.stream(inPlayOddOrEvenTopic, Consumed.with(Serdes.String(), oddOrEvenEventSerde()))
                 .peek((k, message) -> LOGGER.info("Received message [{}]", message))
                 .split()
-                .branch(new IsOddNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
-                        .peek((k, message) -> LOGGER.info("The number [{}] is odd", message.getNumber()))
-                        .to(outOddTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
-                .branch(new IsEvenNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
-                        .peek((k, message) -> LOGGER.info("The number [{}] is even", message.getNumber()))
-                        .to(outEvenTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
-                .noDefaultBranch();
+                    .branch(new IsOddNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
+                            .peek((k, message) -> LOGGER.info("The number [{}] is odd", message.getNumber()))
+                            .to(outOddTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
+                    .branch(new IsEvenNumberPredicate(), Branched.withConsumer(baseStream -> baseStream
+                            .peek((k, message) -> LOGGER.info("The number [{}] is even", message.getNumber()))
+                            .to(outEvenTopic, Produced.with(Serdes.String(), oddOrEvenEventSerde()))))
+                    .noDefaultBranch();
     }
 }
