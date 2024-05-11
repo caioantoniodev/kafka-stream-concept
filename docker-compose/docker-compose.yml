@@ -32,9 +32,9 @@ services:
     hostname: kafka-create-topics
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
                        cub kafka-ready -b kafka:29092 1 20 && \
-                       kafka-topics --create --topic PLAY_ODD_OR_EVEN_TOPIC --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1 && \
-                       kafka-topics --create --topic ODD_TOPIC --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1 && \
-                       kafka-topics --create --topic EVEN_TOPIC --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1'"
+                       kafka-topics --create --topic kafka-stream-concept.odd-or-even.play.v1.dev --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1 && \
+                       kafka-topics --create --topic kafka-stream-concept.odd.number.v1.dev --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1 && \
+                       kafka-topics --create --topic kafka-stream-concept.even.number.v1.dev --if-not-exists --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1'"
     environment:
       KAFKA_BROKER_ID: ignored
       KAFKA_ZOOKEEPER_CONNECT: ignored

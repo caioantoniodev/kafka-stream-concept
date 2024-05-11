@@ -20,6 +20,6 @@ spring:
     consumer:
       auto-offset-reset: latest
 topics:
-  play-odd-or-even-topic: PLAY_ODD_OR_EVEN_TOPIC
-  odd-topic: ODD_TOPIC
-  even-topic: EVEN_TOPIC
+  play-odd-or-even-topic: kafka-stream-concept.odd-or-even.play.v1.dev
+  odd-topic: kafka-stream-concept.odd.number.v1.dev
+  even-topic: kafka-stream-concept.even.number.v1.dev
