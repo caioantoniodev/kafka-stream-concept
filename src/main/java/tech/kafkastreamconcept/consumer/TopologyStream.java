@@ -1,6 +1,5 @@
 package tech.kafkastreamconcept.consumer;
 
-import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Branched;
@@ -33,7 +32,7 @@ public class TopologyStream {
     }
 
     @Autowired
-    void consumeEvent(@Autowired StreamsBuilder builder) {
+    void buildPipeline(@Autowired StreamsBuilder builder) {
         builder.stream(inPlayOddOrEvenTopic, Consumed.with(Serdes.String(), oddOrEvenEventSerde()))
                 .peek((k, message) -> LOGGER.info("Received message [{}]", message))
                 .split()
