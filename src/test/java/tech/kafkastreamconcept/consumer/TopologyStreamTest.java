@@ -18,9 +18,9 @@ public class TopologyStreamTest {
     private Topology topology;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String playOddOrEvenTopicName = "kafka-stream-concept.odd-or-even.play.v1.dev";
-    private final String oddTopicName = "kafka-stream-concept.odd.number.v1.dev";
-    private final String evenTopicName = "kafka-stream-concept.even.number.v1.dev";
+    private final String playOddOrEvenTopicName = "kafka-stream-concept.odd-or-even.play.v1.test";
+    private final String oddTopicName = "kafka-stream-concept.odd.number.v1.test";
+    private final String evenTopicName = "kafka-stream-concept.even.number.v1.test";
 
     @BeforeEach
     void setUp() {
